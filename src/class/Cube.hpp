@@ -3,6 +3,9 @@
 
 #include <array>
 
+#define RBK_FACE std::array<e_rbk_clr, 9>
+#define RBK_CUBE std::array<RBK_FACE, 6>
+
 typedef enum t_rbk_pos
 {
 	POS_TOP_LEFT = 0,
@@ -39,11 +42,17 @@ typedef enum t_rbk_faces
 }	e_rbk_faces;
 
 
+typedef struct FaceSlice
+{
+	e_rbk_faces face;
+	std::array<e_rbk_pos, 3> positions;
+} s_FaceSlice;
+
 class Cube
 {
 	private:
 
-	std::array<std::array<e_rbk_clr, 9>, 6> _face;
+	RBK_CUBE _face;
 	public:
 
 	Cube(void);
@@ -52,6 +61,8 @@ class Cube
 	~Cube(void);
 
 	void display_cube(void);
+	void rotate_face(e_rbk_faces face, bool isRevert);
+	void in_face_rotation(RBK_FACE &face, bool isResvert);
 }		;
 
 #endif
